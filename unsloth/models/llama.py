@@ -1551,6 +1551,7 @@ def _wrap_fast_inference(generate, device_type, dtype, model):
 
         # For newer HF
         kwargs["cache_implementation"] = "dynamic"
+        print('yoyoyo')
         # For num_logits_to_keep
         kwargs["num_logits_to_keep"] = 1
 
