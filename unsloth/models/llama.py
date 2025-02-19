@@ -1808,6 +1808,7 @@ class FastLlamaModel:
             pass
 
             # Load vLLM first
+            print('vllm is getting loaded')
             llm = load_vllm(**load_vllm_kwargs)
 
             # Convert to HF format
