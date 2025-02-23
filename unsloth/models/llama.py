@@ -1851,7 +1851,7 @@ class FastLlamaModel:
         tokenizer = load_correct_tokenizer(
             tokenizer_name    = tokenizer_name,
             model_max_length  = max_position_embeddings,
-            padding           = True,  ######## MADE THIS CHANGE SWARNALI 
+            #padding           = True,  ######## MADE THIS CHANGE SWARNALI 
             padding_side      = "right",
             token             = token,
             trust_remote_code = trust_remote_code,
