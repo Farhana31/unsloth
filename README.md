@@ -40,7 +40,7 @@ All notebooks are **beginner friendly**! Add your dataset, click "Run All", and 
 - Click [here](https://docs.unsloth.ai/) for detailed documentation for Unsloth.
 
 ## 🦥 Unsloth.ai News
-- 📣 NEW! Introducing [Reasoning](https://unsloth.ai/blog/r1-reasoning) in Unsloth. You can now reproduce DeepSeek-R1's "aha" moment with just 7GB VRAM. Transform Llama, Phi, Mistral etc. into reasoning LLMs!
+- 📣 NEW! Introducing Long-context [Reasoning (GRPO)](https://unsloth.ai/blog/grpo) in Unsloth. You can now reproduce DeepSeek-R1's "aha" moment with just 5GB VRAM. Transform Llama, Phi, Mistral etc. into reasoning LLMs!
 - 📣 NEW! [DeepSeek-R1](https://unsloth.ai/blog/deepseek-r1) - the most powerful open reasoning models with Llama & Qwen distillations. Run or fine-tune them now! More details: [unsloth.ai/blog/deepseek-r1](https://unsloth.ai/blog/deepseek-r1). All model uploads: [here](https://huggingface.co/collections/unsloth/deepseek-r1-all-versions-678e1c48f5d2fce87892ace5).
 - 📣 NEW! [Phi-4](https://unsloth.ai/blog/phi4) by Microsoft is now supported. We also [fixed bugs](https://unsloth.ai/blog/phi4) in Phi-4 and [uploaded GGUFs, 4-bit](https://huggingface.co/collections/unsloth/phi-4-all-versions-677eecf93784e61afe762afa). Try the [Phi-4 Colab notebook](https://colab.research.google.com/github/unslothai/notebooks/blob/main/nb/Phi_4-Conversational.ipynb)
 - 📣 NEW! [Llama 3.3 (70B)](https://huggingface.co/collections/unsloth/llama-33-all-versions-67535d7d994794b9d7cf5e9f), Meta's latest model is supported.
@@ -98,9 +98,16 @@ We tested using the Alpaca  Dataset, a batch size of 2, gradient accumulation st
 
 ## 💾 Installation Instructions
 
-For stable releases, use `pip install unsloth`. We recommend `pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"` for most installations though.
+Simply use pip install on Linux machines. Windows instructions are below.
+<div id="user-content-toc">
+  <ul align="center" style="list-style: none;">
+    <summary>
+      <h1><code>pip install unsloth</code></h1>
+    </summary>
+  </ul>
+</div>
 
-### Conda Installation
+### Conda Installation (Optional)
 `⚠️Only use Conda if you have it. If not, use Pip`. Select either `pytorch-cuda=11.8,12.1` for CUDA 11.8 or CUDA 12.1. We support `python=3.10,3.11,3.12`.
 ```bash
 conda create --name unsloth_env \
@@ -110,8 +117,7 @@ conda create --name unsloth_env \
     -y
 conda activate unsloth_env
 
-pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
-pip install --no-deps trl peft accelerate bitsandbytes
+pip install unsloth
 ```
 
 <details>
@@ -187,7 +193,7 @@ print(f'pip install --upgrade pip && pip install "unsloth[{x}] @ git+https://git
 ### Windows Installation
 
 To run Unsloth directly on Windows:
-- Install Triton from this Windows fork and follow the instructions: https://github.com/woct0rdho/triton-windows
+- Install Triton from this Windows fork and follow the instructions: https://github.com/woct0rdho/triton-windows (be aware that the Windows fork requires PyTorch >= 2.4 and CUDA 12)
 - In the SFTTrainer, set `dataset_num_proc=1` to avoid a crashing issue:
 ```python
 trainer = SFTTrainer(
@@ -196,12 +202,15 @@ trainer = SFTTrainer(
 )
 ```
 
+### Advanced/Troubleshooting
+
 For **advanced installation instructions** or if you see weird errors during installations:
 
 1. Install `torch` and `triton`. Go to https://pytorch.org to install it. For example `pip install torch torchvision torchaudio triton`
 2. Confirm if CUDA is installated correctly. Try `nvcc`. If that fails, you need to install `cudatoolkit` or CUDA drivers.
 3. Install `xformers` manually. You can try installing `vllm` and seeing if `vllm` succeeds. Check if `xformers` succeeded with `python -m xformers.info` Go to https://github.com/facebookresearch/xformers. Another option is to install `flash-attn` for Ampere GPUs.
-4.  Finally, install `bitsandbytes` and check it with `python -m bitsandbytes`
+4. Double check that your versions of Python, CUDA, CUDNN, `torch`, `triton`, and `xformers` are compatible with one another. The [PyTorch Compatibility Matrix](https://github.com/pytorch/pytorch/blob/main/RELEASE.md#release-compatibility-matrix) may be useful. 
+5. Finally, install `bitsandbytes` and check it with `python -m bitsandbytes`
 
 ## 📜 [Documentation](https://docs.unsloth.ai)
 - Go to our official [Documentation](https://docs.unsloth.ai) for saving to GGUF, checkpointing, evaluation and more!
