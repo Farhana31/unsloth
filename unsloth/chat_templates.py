@@ -1918,6 +1918,7 @@ extra_eos_tokens = None,
 
     You must use {INPUT}, {OUTPUT} twice, and {SYSTEM} is optional.
     """
+    print("in apply chat template")
     modelfile, jinja_template, input_part, output_part = construct_chat_template(
         tokenizer = tokenizer,
         chat_template = chat_template,
@@ -1925,6 +1926,7 @@ extra_eos_tokens = None,
         extra_eos_tokens = extra_eos_tokens,
     )
     def formatting_prompts_func(examples):
+        print("in apply chat template --> formatting_prompts_func")
         convos = examples["conversations"]
         texts = [tokenizer.apply_chat_template(convo, tokenize = False, add_generation_prompt = False) for convo in convos]
         return { "text" : texts, }
