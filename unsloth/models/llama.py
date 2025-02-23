@@ -1847,9 +1847,11 @@ class FastLlamaModel:
 
         # Counteract saved tokenizers
         tokenizer_name = model_name if tokenizer_name is None else tokenizer_name
+        print('loading tokenizer in llama.py')
         tokenizer = load_correct_tokenizer(
             tokenizer_name    = tokenizer_name,
             model_max_length  = max_position_embeddings,
+            padding           = True,  ######## MADE THIS CHANGE SWARNALI 
             padding_side      = "right",
             token             = token,
             trust_remote_code = trust_remote_code,
